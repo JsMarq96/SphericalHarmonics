@@ -487,7 +487,7 @@ def xy2ll(x,y,width,height):
 		return (yLoc / (float(height)/np.pi))
 	def xLocToLon(xLoc, width):
 		return (xLoc / (float(width)/(np.pi * 2)))
-	return np.asarray([yLocToLat(y, height), xLocToLon(x, width)])
+	return [yLocToLat(y, height), xLocToLon(x, width)]
 
 def getCartesianMap(width):
 	height = int(width/2)
