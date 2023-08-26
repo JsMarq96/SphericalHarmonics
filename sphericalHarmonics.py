@@ -437,6 +437,24 @@ def shPrint(coeffs, precision=3):
 		print(np.around(coeffs[idx,:],precision))
 	print('')
 
+	def coeff_to_vec3(coeff):
+		round_coeff = np.around(coeff,precision)
+		return str(round_coeff[0]) + ', ' + str(round_coeff[1]) + ', ' + str(round_coeff[2])
+
+	code = """
+		vec3 irradiance_spherical_harmonics(in vec3 n) {
+		return vec3("""  + coeff_to_vec3(coeffs[0,:])+  """)
+		+ vec3("""  + coeff_to_vec3(coeffs[1,:])+  """) * (n.y)
+		+ vec3("""  + coeff_to_vec3(coeffs[2,:])+  """) * (n.z)
+		+ vec3("""  + coeff_to_vec3(coeffs[3,:])+  """) * (n.x)
+		+ vec3("""  + coeff_to_vec3(coeffs[4,:])+  """) * (n.y * n.x)
+		+ vec3("""  + coeff_to_vec3(coeffs[5,:])+  """) * (n.y * n.z)
+		+ vec3("""  + coeff_to_vec3(coeffs[6,:])+  """) * (3.0 * n.z * n.z - 1.0)
+		+ vec3("""  + coeff_to_vec3(coeffs[7,:])+  """) * (n.z * n.x)
+		+ vec3("""  + coeff_to_vec3(coeffs[8,:])+  """) * (n.x * n.x - n.y * n.y);
+		}"""
+	print(code)
+
 def shTermsWithinBand(l):
 	return (l*2)+1
 
