@@ -34,7 +34,7 @@ phi: [0 to 2*Pi], from left to right column of pixels
 
 import os, sys
 import numpy as np
-import imageio as im
+import imageio.v2 as im
 import cv2 # resize images with float support
 from scipy import ndimage # gaussian blur
 import time
